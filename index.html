@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="script.js"></script> -->
+</head>
+
+<body>
+    <div id="input-box">
+        <label for="name">name</label><input id="name" type="text" placeholder="enter name">
+        <label for="number">number</label><input id="number" type="number" placeholder="enter number" maxlength="10">
+        <label for="email">email</label><input id="email" type="email" placeholder="enter your email">
+        <button id="btn">add data</button>
+    </div>
+    <table id="mytable" cellspacing="20px">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>contact</th>
+            <th>email</th>
+        </tr>
+    </table>
+    <script>
+        var btn = document.querySelector('#btn');
+        var table = document.querySelector('#mytable');
+        let count="1";
+
+        btn.addEventListener('click', function () {
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+
+            var td = tr.appendChild(document.createElement('td'));
+            var td1 = tr.appendChild(document.createElement('td'));
+            var td2 = tr.appendChild(document.createElement('td'));
+            var td3 = tr.appendChild(document.createElement('td'));
+            var td4 = tr.appendChild(document.createElement('button'));
+            var td5 = tr.appendChild(document.createElement('button'));
+
+            td4.innerHTML = "edit";
+            td4.setAttribute('class', 'edit');
+            td4.addEventListener('click', function() {
+                update(td4, td1, td2, td3);
+            });
+
+            td5.innerHTML = "delete";
+            td5.addEventListener('click', function() {
+                del(td5);
+            });
+            td5.className = "dlt";
+
+            td.innerHTML = count;
+            td1.innerHTML = document.getElementById('name').value;
+            td2.innerHTML = document.getElementById('number').value;
+            td3.innerHTML = document.getElementById('email').value;
+            count++
+            document.getElementById('name').value="";
+           document.getElementById('number').value="";
+          document.getElementById('email').value="";
+        });
+
+        function update(button, td1, td2, td3) {
+            button.innerHTML = "update";
+
+            var inputName = document.createElement('input');
+            inputName.value = td1.innerHTML;
+            inputName.setAttribute('id','name');
+            td1.innerHTML = "";
+            td1.appendChild(inputName);
+
+            var inputNumber = document.createElement('input');
+            inputNumber.value = td2.innerHTML;
+            td2.innerHTML = "";
+            td2.appendChild(inputNumber);
+
+            var inputEmail = document.createElement('input');
+            inputEmail.value = td3.innerHTML;
+            td3.innerHTML = "";
+            td3.appendChild(inputEmail);
+
+            button.removeEventListener('click', update);
+            button.addEventListener('click', function() {
+                save(button, td1, td2, td3);
+            });
+        }
+
+        function del(button) {
+            let row = button.parentNode;
+            table.removeChild(row);
+        }
+
+        function save(button, td1, td2, td3, inputName) {
+            button.innerHTML = "edit";
+
+            // td1.innerHTML = document.getElementById('name').value;
+            // td2.innerHTML = document.querySelectorAll('input')[1].value;
+            // td3.innerHTML = document.querySelectorAll('input')[2].value;
+            button.removeEventListener('click', save);
+            button.addEventListener('click', function() {
+                update(button, td1, td2, td3);
+            });
+        }
+        console.log()
+    </script>
+</body>
+
+</html>

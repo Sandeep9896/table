@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+#mytable{
+    position: absolute;
+    top: 150px;
+    left: 30%;
+}
+#input-box{
+    display: flex;
+    width: 40%;
+    margin: auto;
+    flex-direction: column;
+    background-color: aqua;
+}
+th{
+    background-color: aqua;
+}
